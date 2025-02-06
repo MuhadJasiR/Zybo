@@ -14,54 +14,68 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _selectedIndex);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    _pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
-
-  List<Widget> screens = [
-    const HomeScreen(),
-    const WishlistScreen(),
-    const ProfileScreen()
-  ];
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Stack(children: [
-      screens[_selectedIndex],
-      Positioned(
-        bottom: 5,
-        child: Container(
-          width: size.width - 35,
-          height: 70,
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
+      body: Stack(
+        children: [
+          PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              HomeScreen(),
+              WishlistScreen(),
+              ProfileScreen(),
+            ],
+          ),
+          Positioned(
+            bottom: 5,
+            child: Container(
+              width: size.width - 35,
+              height: 70,
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildNavItem("assets/icon/home.svg", "Home", 0),
+                  _buildNavItem("assets/icon/Like Button.svg", "WishList", 1),
+                  _buildNavItem("assets/icon/profile.svg", "Profile", 2),
+                ],
+              ),
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem("assets/icon/home.svg", "Home", 0),
-              _buildNavItem("assets/icon/Like Button.svg", "WishList", 1),
-              _buildNavItem("assets/icon/profile.svg", "Profile", 2),
-            ],
-          ),
-        ),
+        ],
       ),
-    ]));
+    );
   }
 
   Widget _buildNavItem(String icon, String label, int index) {
@@ -69,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return GestureDetector(
       onTap: () => _onItemTapped(index),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: isSelected
             ? BoxDecoration(
                 color: AppColor.primaryColor,
@@ -95,5 +109,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }

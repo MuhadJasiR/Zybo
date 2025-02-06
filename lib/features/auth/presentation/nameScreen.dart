@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zybo/core/theme/const_size.dart';
-import 'package:zybo/features/auth/application/bloc/auth_bloc.dart';
+import 'package:zybo/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:zybo/features/auth/presentation/widgets/back_button.dart';
 import 'package:zybo/features/home/presentation/widgets/bottom_nav_bar.dart';
 

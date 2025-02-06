@@ -6,7 +6,7 @@ import 'package:zybo/core/theme/const_size.dart';
 import 'package:zybo/features/auth/presentation/login_screen.dart';
 
 import 'package:zybo/features/profile/presentation/bloc/bloc/user_bloc.dart';
-import 'package:zybo/init_dependencies.dart';
+import 'package:zybo/set_up_service_locator.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

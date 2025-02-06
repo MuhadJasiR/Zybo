@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:zybo/core/theme/app_color.dart';
 import 'package:zybo/core/theme/const_size.dart';
 import 'package:zybo/features/home/domain/entities/product.dart';
@@ -8,8 +9,10 @@ import 'package:zybo/features/home/presentation/bloc/product/product_bloc.dart';
 import 'package:zybo/features/home/presentation/bloc/search/search_bloc.dart';
 import 'package:zybo/features/home/presentation/widgets/product_card.dart';
 import 'package:zybo/features/home/presentation/widgets/search_bar.dart';
+import 'package:zybo/features/home/presentation/widgets/shimmer_loading.dart';
 import 'package:zybo/features/home/presentation/widgets/top_banner.dart';
-import 'package:zybo/init_dependencies.dart';
+import 'package:zybo/features/wishlist/presentation/bloc/bloc/wishlist_bloc.dart';
+import 'package:zybo/set_up_service_locator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,6 +45,9 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 BlocProvider(
                   create: (context) => serviceLocator<SearchBloc>(),
+                ),
+                BlocProvider(
+                  create: (context) => serviceLocator<WishlistBloc>(),
                 )
               ],
               child: Column(
@@ -79,8 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
                         return BlocBuilder<ProductBloc, ProductState>(
                             builder: (context, state) {
                           if (state is ProductLoading) {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return const ProductShimmerLoading();
                           } else if (state is ProductLoaded) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,14 +93,15 @@ class _HomeScreenState extends State<HomeScreen>
                                 const Text('Popular Product',
                                     style: TextStyle(
                                         fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                                kHeight(20),
+                                        fontWeight: FontWeight.w500)),
+                                kHeight(10),
                                 _buildProductGrid(state.products),
+                                kHeight(25),
                                 const Text('Latest Products',
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold)),
-                                kHeight(20),
+                                kHeight(10),
                                 _buildProductGrid(state.products),
                               ],
                             );

@@ -1,16 +1,65 @@
-# zybo
+# Flutter Project Setup
 
-A new Flutter project.
+## 📌 Prerequisites
+Before setting up the Flutter project, ensure you have the following installed:
 
-## Getting Started
+- **Flutter SDK**: [Install Flutter](https://flutter.dev/docs/get-started/install)
+- **Dart SDK** (comes with Flutter)
+- **Android Studio** (for Android development)
+- **Xcode** (for iOS development - macOS only)
+- **VS Code or IntelliJ** (optional, but recommended for development)
 
-This project is a starting point for a Flutter application.
+## 🚀 Getting Started
 
-A few resources to get you started if this is your first Flutter project:
+### 1️⃣ Clone the Repository
+```sh
+  git clone <git@github.com:MuhadJasiR/Zybo.git>
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2️⃣ Install Dependencies
+```sh
+  flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 3️⃣ Run the Project
+#### Android
+```sh
+  flutter run
+```
+
+#### iOS
+```sh
+  cd ios && pod install && cd ..
+  flutter run
+```
+
+#### Web
+```sh
+  flutter run -d chrome
+```
+
+### 4️⃣ Build APK/IPA
+#### Android (APK)
+```sh
+  flutter build apk --release
+```
+
+#### iOS (IPA)
+```sh
+  flutter build ios --release
+```
+
+## 📂 Folder Structure
+```sh
+lib/
+ ├── core/          # Theme, Constants, Utilities
+ ├── data/          # API Calls, Repositories
+ ├── domain/        # Business Logic, Use Cases
+ ├── presentation/  # UI Screens, Widgets, Bloc
+```
+
+## ✅ Additional Notes
+- Run `flutter doctor` to check for any missing dependencies.
+- Use `flutter clean` if you face build issues.
+- Follow the **Bloc Pattern** for state management (if applicable).
+

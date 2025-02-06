@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:zybo/features/auth/application/bloc/auth_bloc.dart';
+import 'package:zybo/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:zybo/features/auth/domain/auth_repository.dart';
 import 'package:zybo/features/auth/domain/auth_usecase.dart';
-import 'package:zybo/features/auth/infrastructure/auth_remote_data_source.dart';
-import 'package:zybo/features/auth/infrastructure/auth_repository_imp.dart';
+import 'package:zybo/features/auth/data/auth_remote_data_source.dart';
+import 'package:zybo/features/auth/data/auth_repository_imp.dart';
 import 'package:zybo/features/home/data/data_sources/banner_remote_data_source.dart';
 import 'package:zybo/features/home/data/data_sources/product_remote_data_source.dart';
 import 'package:zybo/features/home/data/repository/banner_repository_imp.dart';

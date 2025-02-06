@@ -11,13 +11,14 @@ import 'package:zybo/features/home/domain/entities/product.dart';
 import 'package:zybo/features/wishlist/presentation/bloc/bloc/wishlist_bloc.dart';
 
 class ProductCard extends StatefulWidget {
-  const ProductCard({
-    super.key,
-    required this.products,
-    required this.isInWishlist,
-  });
+  const ProductCard(
+      {super.key,
+      required this.products,
+      required this.isInWishlist,
+      this.wishList});
 
   final Product products;
+  final Product? wishList;
   final bool isInWishlist;
 
   @override
@@ -62,7 +63,7 @@ class _ProductCardState extends State<ProductCard> {
                 height: 180,
                 width: double.infinity,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                         fit: BoxFit.cover, widget.products.imageUrl[0]))),
             Positioned(
@@ -106,8 +107,8 @@ class _ProductCardState extends State<ProductCard> {
             widget.products.name,
             style: const TextStyle(
                 overflow: TextOverflow.ellipsis,
-                fontSize: 20,
-                fontWeight: FontWeight.w500),
+                fontSize: 15,
+                fontWeight: FontWeight.w600),
           ),
         )
       ],

@@ -1,5 +1,5 @@
 import 'package:zybo/features/auth/domain/auth_repository.dart';
-import 'package:zybo/features/auth/infrastructure/auth_remote_data_source.dart';
+import 'package:zybo/features/auth/data/auth_remote_data_source.dart';
 
 class AuthRepositoryImp implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;

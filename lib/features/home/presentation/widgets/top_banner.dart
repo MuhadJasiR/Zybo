@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:zybo/core/theme/app_color.dart';
 import 'package:zybo/core/theme/const_size.dart';
 import 'package:zybo/features/home/presentation/bloc/banner/banner_bloc.dart';
+import 'package:zybo/features/home/presentation/widgets/shimmer_loading.dart';
 
 class TopBanner extends StatefulWidget {
   const TopBanner({
@@ -22,7 +24,7 @@ class _TopBannerState extends State<TopBanner> {
     return BlocBuilder<BannerBloc, BannerState>(
       builder: (context, state) {
         if (state is BannerLoading) {
-          return SizedBox();
+          return const ShimmerBannerLoading();
         } else if (state is BannerLoaded) {
           return Column(
             children: [
